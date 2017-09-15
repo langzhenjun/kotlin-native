@@ -1,4 +1,5 @@
 headers = curl/curl.h
 headerFilter = curl/*
-linkerOpts.osx = -L/opt/local/lib -L/usr/local/opt/curl/lib -lcurl
-linkerOpts.linux = -L/usr/lib/x86_64-linux-gnu -lcurl
+libraryPaths.osx = /opt/local/lib /usr/local/opt/curl/lib 
+libraryPaths.linux = /usr/lib/x86_64-linux-gnu
+staticLibraries = libcurl.a libssl.a libz.a
