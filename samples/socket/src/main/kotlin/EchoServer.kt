@@ -15,7 +15,7 @@
  */
 
 import kotlinx.cinterop.*
-import sockets.*
+import posix.*
 
 fun main(args: Array<String>) {
     if (args.size < 1) {
@@ -65,9 +65,9 @@ fun main(args: Array<String>) {
 }
 
 val errno: Int
-    get() = interop_errno()
+    get() = posix_errno()
 
-fun htons(value: Short) = interop_htons(value.toInt()).toShort()
+fun htons(value: Short) = posix_htons(value.toInt()).toShort()
 
 inline fun Int.ensureUnixCallResult(predicate: (Int) -> Boolean): Int {
     if (!predicate(this)) {

@@ -15,7 +15,7 @@
  */
 
 import kotlinx.cinterop.*
-import sockets.*
+import posix.*
 import kotlin.coroutines.experimental.*
 import kotlin.coroutines.experimental.intrinsics.*
 
@@ -197,15 +197,15 @@ fun acceptClientsAndRun(serverFd: Int, block: suspend Client.() -> Unit) {
 class IOException(message: String): RuntimeException(message)
 
 val errno: Int
-    get() = interop_errno()
+    get() = posix_errno()
 
-fun FD_ZERO(set: fd_set): Unit = interop_FD_ZERO(set.ptr)
+fun FD_ZERO(set: fd_set): Unit = posix_FD_ZERO(set.ptr)
 
-fun FD_SET(bit: Int, set: fd_set): Unit = interop_FD_SET(bit, set.ptr)
+fun FD_SET(bit: Int, set: fd_set): Unit = posix_FD_SET(bit, set.ptr)
 
-fun FD_ISSET(bit: Int, set: fd_set) = interop_FD_ISSET(bit, set.ptr) != 0
+fun FD_ISSET(bit: Int, set: fd_set) = posix_FD_ISSET(bit, set.ptr) != 0
 
-fun htons(value: Short) = interop_htons(value.toInt()).toShort()
+fun htons(value: Short) = posix_htons(value.toInt()).toShort()
 
 fun getUnixError() = strerror(errno)!!.toKString()
 
