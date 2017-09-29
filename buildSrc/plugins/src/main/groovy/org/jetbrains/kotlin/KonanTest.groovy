@@ -19,7 +19,6 @@ package org.jetbrains.kotlin
 import groovy.json.JsonOutput
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.JavaExec
-import org.gradle.api.tasks.ParallelizableTask
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecResult
 import org.jetbrains.kotlin.konan.target.*
@@ -301,7 +300,6 @@ class TestFailedException extends RuntimeException {
         super(s)
     }
 }
-@ParallelizableTask
 class RunKonanTest extends KonanTest {
     void compileTest(List<String> filesToCompile, String exe) {
         runCompiler(filesToCompile, exe, flags?:[])
@@ -312,7 +310,6 @@ class RunKonanTest extends KonanTest {
 // Don't use this task for regular testing as
 // project.exec + a shell script isolate the jvm
 // from IDEA. Use the RunKonanTest instead.
-@ParallelizableTask
 class RunDriverKonanTest extends KonanTest {
 
     RunDriverKonanTest() {
@@ -347,7 +344,6 @@ class RunDriverKonanTest extends KonanTest {
     }
 }
 
-@ParallelizableTask
 class RunInteropKonanTest extends KonanTest {
 
     private String interop
@@ -375,7 +371,6 @@ class RunInteropKonanTest extends KonanTest {
     }
 }
 
-@ParallelizableTask
 class LinkKonanTest extends KonanTest {
     protected String lib
 
@@ -388,7 +383,6 @@ class LinkKonanTest extends KonanTest {
     }
 }
 
-@ParallelizableTask
 class RunExternalTestGroup extends RunKonanTest {
 
     def groupDirectory = "."
